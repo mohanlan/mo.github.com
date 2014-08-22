@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>ImgListPulign</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" type="text/css" href="style/css/imgList.css">
+</head>
+<body>
+	<div id="test"></div>
+	<script src="js/jquery.js"></script>
+    <script src="js/ImgListPlug.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			//可以改变的参数
+			/*containsSize:{width:1000,height:600}, //容器大小
+			renderTo: $(document.body), 	//imgList的承载容器，默认为document.body
+			enablePaging:false,			    //可否分页
+			listTitle:"图片列表标题",		//图片列表标题
+			enableShowDetails:false,		//可否显示详情*/
+			var seeting={
+				containsSize:{width:830,height:600}, 				//设置imgList大小
+				renderTo:$("#test")				 				//设置父容器位置
+			}
+			var iList = new imgListObject(seeting);					//新建imgList对象
+			iList.init();											//执行初始化操作
+			iList.hideTitle();										//隐藏标题
+			var jsonurl="common/imgJson.json?date="+new Date().getTime();
+			data={title:"name",i1:"address",i2:"count",i3:"state"};	//data数据其中id(title,i1,i2,i3)不可变，后面的值可以变
+			iList.loadJson(jsonurl,data);							//获取数据并渲染
+			//console.log(iList);
+			iList.setFunction(["add","update","checkDate"]); 		//添加操作函数
+			//detail={title:"name",li1:"",li1:"shebei",li2:""}
+			iList.setDetailsView();
+
+		})
+	</script>
+</body>
+</html>
+
+
